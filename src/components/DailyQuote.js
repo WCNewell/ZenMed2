@@ -1,35 +1,30 @@
 import React, { Component } from 'react'  
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import axios from 'axios'
-import QuoteDetail from './QuoteDetail'
+// import customData from '../quotes.json'
+// import QuoteDetail from './QuoteDetail'
 
 class DailyQuote extends Component {
-    // initial empty or base state when app firsts boots up, setState already exists in class-based Components only
-    // A JS object used to record and respond to user-triggered events
     
     state = { quotes: [] }
 
     componentWillMount() {
-        axios.get('https://quotes.rest/quote/random.json?api_key=WYIvXbe1f6_RzkfkFPNy6AeF')
-        .then(response => this.setState({ quotes: response.data }))
+        axios.get('https://quotes.rest/qod.json?api_key=WYIvXbe1f6_RzkfkFPNy6AeF')
+        .then(response => {console.log('quote of the day', response.data.contents.quotes)})
+        .then(response => this.setState({ quote: response.data.contents.quotes }))
+        .catch(error => {console.dir('hello', error)})
     }
 
-    // a helper method:
-    
     renderQuotes() {
-        return this.state.quotes.map(quote =>
-            <QuoteDetail key={quote.id} quote={quote} />
-        )
+        return this.state.quotes(quote => <Text>{quotes.quote}</Text>)
     }
-
-    // class requires the render method
     
     render() {
         console.log(this.state)
 
         return (
             <View>
-                {this.renderQuotes()}
+                <Text>Daily Quote Here!</Text>
             </View>
         )
     }
