@@ -3,6 +3,7 @@ package com.zenmed2;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.futurice.rctaudiotoolkit.AudioPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import rnsoundplayer.RNSoundPlayerPackage;
@@ -28,11 +29,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
+            new RNSoundPackage(),
             new AudioPackage(),
             new ReactNativeAudioPackage(),
             new RNSoundPlayerPackage(),
             new SoundModulePackage(),
-            new RNSoundPackage()
       );
     }
 
