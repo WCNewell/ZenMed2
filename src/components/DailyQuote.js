@@ -1,30 +1,26 @@
 import React, { Component } from 'react'  
 import { View, Text } from 'react-native'
 import axios from 'axios'
-// import customData from '../quotes.json'
 // import QuoteDetail from './QuoteDetail'
 
 class DailyQuote extends Component {
     
-    state = { quotes: [] }
+    state = { quote: {} }
 
     componentWillMount() {
         axios.get('https://quotes.rest/qod.json?api_key=WYIvXbe1f6_RzkfkFPNy6AeF')
-        .then(response => {console.log('quote of the day', response.data.contents.quotes)})
-        .then(response => this.setState({ quote: response.data.contents.quotes }))
-        .catch(error => {console.dir('hello', error)})
-    }
-
-    renderQuotes() {
-        return this.state.quotes(quote => <Text>{quotes.quote}</Text>)
+        // .then(response => {console.log(response.data.contents.quotes[0])})
+        .then(response => this.setState({ quote: response.data.contents.quotes[0]}))
+        .catch(error => {console.dir('error', error)}) 
     }
     
     render() {
-        console.log(this.state)
+        console.log(this.state.quote)
 
         return (
             <View>
-                <Text>Daily Quote Here!</Text>
+                <Text>Quote of the Day: {this.state.quote.quote}</Text>
+                <Text>Author: {this.state.quote.author}</Text>
             </View>
         )
     }
